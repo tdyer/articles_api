@@ -1,7 +1,4 @@
 class ArticlesController < ApplicationController
-  def default_serializer_options
-      {root: false}
-  end
 
   # GET /articles
   # GET /articles.json
@@ -52,7 +49,7 @@ class ArticlesController < ApplicationController
     head :no_content
   end
 
-  private 
+  private
 
   def article_params
     params.require(:article).permit(:id, :title, :body)
