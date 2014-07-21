@@ -1,3 +1,4 @@
+# User.destroy_all
 
 num_users = 30
 num_users.times do |i|
@@ -33,16 +34,25 @@ artist_names = []
   artist_names << Faker::Name.name
 end
 
+# Create songs
 songs = []
 20.times do |i|
   song = Song.create!(title: "title #{i}", artist: artist_names.sample, duration: (1..300).to_a.sample, price: 1.99)
   puts "creating song #{song.inspect}"
-  songs << songs
+  songs << song
 end
 
 users = User.all
 
+# 
 genres = %w{ jazz blues rock rap}
-# 10.times do |i|
-#    Playlist.create!(user: users.sample, name: "playlist #{i}", genre: genres.sample)
-# end
+
+10.times do |i|
+  playlist = Playlist.create!(user: users.sample, name: "playlist #{i}", genre: genres.sample)
+  (1..5).to_a.sample.times do |j|
+    song = songs.sample
+    playlist.songs << song
+    playlist.save!
+    puts "Added song #{song.title} to playlist #{playlist.name}"
+  end
+end
