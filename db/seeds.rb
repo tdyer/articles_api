@@ -1,6 +1,7 @@
+
 num_users = 30
 num_users.times do |i|
-  User.create!(email: Faker::Internet.email)  
+  User.create!(email: Faker::Internet.email)
 end
 
 num_articles = 10
@@ -26,3 +27,22 @@ last_article = Article.last
     the_user = User.find(rand(1..num_users))
     last_article.comments.create!(body: Faker::Lorem.paragraphs(i+1).join(' '), user: the_user)
 end
+
+artist_names = []
+5.times do
+  artist_names << Faker::Name.name
+end
+
+songs = []
+20.times do |i|
+  song = Song.create!(title: "title #{i}", artist: artist_names.sample, duration: (1..300).to_a.sample, price: 1.99)
+  puts "creating song #{song.inspect}"
+  songs << songs
+end
+
+users = User.all
+
+genres = %w{ jazz blues rock rap}
+# 10.times do |i|
+#    Playlist.create!(user: users.sample, name: "playlist #{i}", genre: genres.sample)
+# end
